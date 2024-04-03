@@ -4,9 +4,17 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./UserList.css";
 import { Delete, Visibility } from "@mui/icons-material";
+import { useFetchUser } from "../../../utils/hook/UserAPI";
+import React from "react";
 
 const UserList = () => {
   const [data, setData] = useState(userRows);
+  const { userData, userLoading } = useFetchUser();
+
+  const dataWithId = userData.map((item, index) => ({
+    ...item,
+    id: index + 1,
+  }));
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
@@ -47,7 +55,7 @@ const UserList = () => {
         </Link>
       </div>
       <DataGrid
-        rows={data}
+        rows={dataWithId}
         columns={userColumns.concat(actionColumn)}
         checkboxSelection
       />

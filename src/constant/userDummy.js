@@ -9,7 +9,11 @@ export const userColumns = [
         <div className="cellWithImg">
           <img
             className="cellImg"
-            src={params.row.profile_picture}
+            src={
+              params.row.profile_picture
+                ? params.row.profile_picture
+                : "https://www.shutterstock.com/image-vector/male-avatar-profile-picture-vector-600nw-149083895.jpg"
+            }
             alt="avatar"
           />
           {params.row.first_name + " " + params.row.last_name}
